@@ -9,7 +9,7 @@
 ⚙️ Installation & Setup
 
 1️⃣ Clone the Repository
-git clone https://github.com/your-username/movie-recommender-app.git
+git clone https://github.com/bittukr01/MovieRecomendation.git
 cd movie-recommender-app
 
 2️⃣ Backend Setup (Flask)
