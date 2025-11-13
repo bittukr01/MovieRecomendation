@@ -9,15 +9,23 @@
 ⚙️ Installation & Setup
 
 1️⃣ Clone the Repository
+
 git clone https://github.com/bittukr01/MovieRecomendation.git
+
 cd movie-recommender-app
 
 2️⃣ Backend Setup (Flask)
+
 cd backend
+
 python -m venv venv
+
 venv\Scripts\activate        # (Windows)
+
 # source venv/bin/activate   # (Mac/Linux)
+
 pip install -r requirements.txt
+
 python app.py
 
 
@@ -42,8 +50,11 @@ python app.py
 🏗️ Tech Stack
 
 Frontend	: React.js, HTML5, CSS3, JavaScript
+
 Backend	: Flask (Python), Flask-CORS
+
 Dataset	: main_data.csv
+
 Build Tools	: Node.js, NPM
 
 
