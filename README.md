@@ -6,12 +6,46 @@
 3. Based on the searched movie users are recommended movie which are fetched for the python-flask backend that uses local dataset and content-based filtering algorithm for recommendation.
 
 
- Installation
- 
- 1. python -m venv venv
- 2. venv\Scripts\activate
- 3. pip install -r requirements.txt
- 4. python app.py
+⚙️ Installation & Setup
+
+1️⃣ Clone the Repository
+git clone https://github.com/your-username/movie-recommender-app.git
+cd movie-recommender-app
+
+2️⃣ Backend Setup (Flask)
+cd backend
+python -m venv venv
+venv\Scripts\activate        # (Windows)
+# source venv/bin/activate   # (Mac/Linux)
+pip install -r requirements.txt
+python app.py
+
+
+🚀 Features
+
+🎥 Recommend movies based on input title or genre
+
+⚡ Frontend built with React.js
+
+🧩 Backend powered by Flask (Python)
+
+🌐 REST API integration between Flask and React
+
+💾 CSV-based movie dataset for offline recommendation
+
+🔒 CORS-enabled secure API calls
+
+📊 Clean and responsive UI
+
+
+
+🏗️ Tech Stack
+
+Frontend	: React.js, HTML5, CSS3, JavaScript
+Backend	: Flask (Python), Flask-CORS
+Dataset	: main_data.csv
+Build Tools	: Node.js, NPM
+
 
 
 
