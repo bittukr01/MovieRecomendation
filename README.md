@@ -20,13 +20,15 @@ cd backend
 
 python -m venv venv
 
-venv\Scripts\activate        # (Windows)
 
-# source venv/bin/activate   # (Mac/Linux)
+venv\Scripts\activate  
+
 
 pip install -r requirements.txt
 
+
 python app.py
+
 
 
 🚀 Features
@@ -44,6 +46,8 @@ python app.py
 🔒 CORS-enabled secure API calls
 
 📊 Clean and responsive UI
+
+
 
 
 
