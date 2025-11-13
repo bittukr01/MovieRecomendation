@@ -14,9 +14,8 @@ git clone https://github.com/bittukr01/MovieRecomendation.git
 
 cd movie-recommender-app
 
-2️⃣ Backend Setup (Flask)
 
-cd backend
+2️⃣ Backend Setup (Flask)
 
 python -m venv venv
 
@@ -28,6 +27,10 @@ pip install -r requirements.txt
 
 
 python app.py
+
+
+
+
 
 
 
@@ -46,6 +49,9 @@ python app.py
 🔒 CORS-enabled secure API calls
 
 📊 Clean and responsive UI
+
+
+
 
 
 
