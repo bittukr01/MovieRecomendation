@@ -6,26 +6,46 @@ import MovieCard from "./Components/MovieCard";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-    const apiKey = "api_key=b97316ed479ee4226afefc88d1792909";
+    // const apiKey = "api_key=b97316ed479ee4226afefc88d1792909";
+    const apiKey = "api_key=bb53258c171acd01bc452bacabfe7cd0";
     const [list, setList] = useState([]);
-    const [homeGenreList, setHomeGenreList] = useState([{}]);
+    const [homeGenreList, setHomeGenreList] = useState([]);
     const [selectedGenres, setSelectedGenres] = useState([]);
-    const [currMovies, setCurrMovies] = useState([{}]);
+    const [currMovies, setCurrMovies] = useState([]);
 
     useEffect(() => {
         setCurrMovies([]);
         setSelectedGenres([]);
         setHomeGenreList([]);
         setList([]);
-        //getting the list of all movies from our flask server for our searchbar
+
+        // Fetching movies
         fetch("/api/movies").then((Response) =>
             Response.json().then((data) => setList(data.arr))
         );
-        // getting the list of all genres
-        fetch(`https://api.themoviedb.org/3/genre/movie/list?${apiKey}`).then(
-            (Response) =>
-                Response.json().then((data) => setHomeGenreList(data.genres))
-        );
+
+        // Fetching all genres and filtering only required 
+        fetch(`https://api.themoviedb.org/3/genre/movie/list?${apiKey}`)
+            .then((Response) => Response.json())
+            .then((data) => {
+                const allowedGenres = [
+                    "Action",
+                    "History",
+                    "Comedy",
+                    "Drama",
+                    "Horror",
+                    "Family",
+                    "Mystery",
+                    "Science Fiction",
+                    "Thriller"
+                ];
+
+                const filtered = data.genres.filter((g) =>
+                    allowedGenres.includes(g.name)
+                );
+
+                setHomeGenreList(filtered);
+            });
     }, []);
 
     useEffect(() => {
@@ -42,45 +62,33 @@ const Home = () => {
     }, [selectedGenres]);
 
     const onTagClick = (genreId) => {
-        let isPresent = false;
-        for (let id of selectedGenres) {
-            if (id === genreId) {
-                isPresent = true;
-                break;
-            }
-        }
-        if (isPresent) {
-            setSelectedGenres(
-                selectedGenres.filter((item) => item !== genreId)
-            );
+        if (selectedGenres.includes(genreId)) {
+            setSelectedGenres(selectedGenres.filter((id) => id !== genreId));
         } else {
-            setSelectedGenres((selectedGenres) => [...selectedGenres, genreId]);
+            setSelectedGenres([...selectedGenres, genreId]);
         }
     };
+
     const renderMovies = () =>
-        currMovies.map((movie) => {
-            if (movie) {
-                return (
-                    <MovieCard
-                        key={movie.id + movie.original_title}
-                        movie={movie}
-                    />
-                );
-            } else {
-                return null;
-            }
-        });
+        currMovies.map((movie) =>
+            movie ? (
+                <MovieCard
+                    key={movie.id + movie.original_title}
+                    movie={movie}
+                />
+            ) : null
+        );
 
     return (
         <div className="container-fluid">
             <div className="HomePage">
                 <NavBar isHome={false} />
                 <div className="HomeSearch">
-                    {/*Rendering the searchbar */}
                     <SearchBar movies={list} placeholder="Search for a Movie" />
                 </div>
 
-                <h2 className="genreHeader">Get Top Movies Based On Genre </h2>
+                <h2 className="genreHeader">Movies Tailored to Your Taste</h2>
+
                 <div className="buttonGrid">
                     {homeGenreList.map((genre) => (
                         <div
@@ -94,21 +102,19 @@ const Home = () => {
                         >
                             {genre.name}
                             {selectedGenres.includes(genre.id) ? (
-                                <i
-                                    className="fa fa-times"
-                                    aria-hidden="true"
-                                ></i>
+                                <i className="fa fa-times" aria-hidden="true"></i>
                             ) : null}
                         </div>
                     ))}
                 </div>
             </div>
-            {/*Rendering selected genre movies */}
+
             <div className="container-fluid HomeMovies">
                 <div className="container HomeMovieGrid">
                     {currMovies.length > 0 ? renderMovies() : null}
                 </div>
             </div>
+
             <div className="HomeFooter">
                 <Footer />
             </div>
